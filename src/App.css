@@ -9,21 +9,26 @@ body {
 .card-title {
   font-size: 1.2rem;
   padding: 0.5rem;
-  background-color: #bdbdbd;
+  background-color: #e9e9ed;
 }
 .card-body {
   padding: 0.5rem;
+  padding-bottom: 1rem;
 }
 .button {
   font-size: 1.05rem;
 }
-.poll {
+.poll, .newquestion {
   width: 500px;
   margin: 0 auto;
 }
-.poll-title {
-  margin: 0.5rem 0;
-}
 .poll-options {
   margin-bottom: 1rem;
+}
+.newquestion-options {
+  margin-bottom: 1rem;
+}
+.newquestion input {
+  width: 50%;
+  display: block;
 }

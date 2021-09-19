@@ -14,13 +14,13 @@ const Poll = () => {
   const handleSubmit = () => {
     setShowResults(true);
   };
-  
+
   return (
     <div className='poll'>
       <Card title='Tyler Asks:'>
         {!showResults ? (
           <div className='poll-question'>
-            <h2 className='poll-title'>Would You Rather...</h2>
+            <h2>Would You Rather...</h2>
 
             <div className='poll-options'>
               <div>
@@ -52,7 +52,7 @@ const Poll = () => {
           </div>
         ) : (
           <div className='poll-results'>
-            <h2 className='poll-title'>Results</h2>
+            <h2>Results</h2>
 
             <div className='poll-options'>
               <div>
