@@ -18,7 +18,7 @@ body {
 .button {
   font-size: 1.05rem;
 }
-.poll, .newquestion {
+.poll, .newquestion, .leaderboard {
   width: 500px;
   margin: 0 auto;
 }
@@ -29,6 +29,12 @@ body {
   margin-bottom: 1rem;
 }
 .newquestion input {
-  width: 50%;
+  width: 90%;
   display: block;
+}
+.leaderboard-list {
+  list-style-type: none;
+}
+.leaderboard-list li {
+  margin-bottom: 1rem;
 }
