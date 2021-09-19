@@ -1,4 +1,5 @@
 import './App.css';
+import Home from './pages/Home';
 import LeaderBoard from './pages/LeaderBoard';
 import NewQuestion from './pages/NewQuestion';
 import Poll from './pages/Poll';
@@ -10,7 +11,8 @@ function App() {
       {/* <Poll/> */}
       {/* <NewQuestion /> */}
       {/* <LeaderBoard /> */}
-      <Signin />
+      {/* <Signin /> */}
+      <Home />
     </div>
   );
 }

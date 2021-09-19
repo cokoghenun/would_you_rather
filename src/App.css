@@ -21,7 +21,8 @@ body {
 .poll,
 .newquestion,
 .leaderboard,
-.signin {
+.signin,
+.home {
   width: 500px;
   margin: 0 auto;
 }
@@ -36,11 +37,13 @@ body {
   font-size: 1rem;
   display: block;
 }
-.leaderboard-list {
+.leaderboard-list,
+.home-list {
   padding: 0;
   list-style-type: none;
 }
-.leaderboard-list li {
+.leaderboard-list li,
+.home-list li {
   margin-bottom: 1rem;
 }
 .signin-select {
