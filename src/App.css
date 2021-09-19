@@ -18,7 +18,10 @@ body {
 .button {
   font-size: 1.05rem;
 }
-.poll, .newquestion, .leaderboard {
+.poll,
+.newquestion,
+.leaderboard,
+.signin {
   width: 500px;
   margin: 0 auto;
 }
@@ -30,11 +33,18 @@ body {
 }
 .newquestion input {
   width: 90%;
+  font-size: 1rem;
   display: block;
 }
 .leaderboard-list {
+  padding: 0;
   list-style-type: none;
 }
 .leaderboard-list li {
+  margin-bottom: 1rem;
+}
+.signin-select {
+  width: 90%;
+  font-size: 1rem;
   margin-bottom: 1rem;
 }
