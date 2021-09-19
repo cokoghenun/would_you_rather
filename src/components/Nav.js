@@ -1,6 +1,8 @@
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 const Nav = () => {
+  const user = useSelector((state) => state.user);
   return (
     <nav className='nav'>
       <ul className='nav-links'>
@@ -21,7 +23,12 @@ const Nav = () => {
         </li>
       </ul>
       <div className='nav-account'>
-        <span>Hello Mark</span> <span><NavLink exact to='/signin'>Sign out</NavLink></span>
+        <span>Hello {user.name}</span>{' '}
+        <span>
+          <NavLink exact to='/signin'>
+            Sign out
+          </NavLink>
+        </span>
       </div>
     </nav>
   );

@@ -1,6 +1,6 @@
 import { _getQuestions, _saveQuestion, _saveQuestionAnswer } from '../_DATA';
 
-export default function question(state = {}, action) {
+export default function questions(state = [], action) {
   switch (action.type) {
     case 'QUESTION_LOADED':
       return action.payload;
@@ -13,7 +13,10 @@ export default function question(state = {}, action) {
 
 export async function fetchQuestions(dispatch, getState) {
   const response = await _getQuestions();
-  dispatch({ type: 'QUESTION_LOADED', payload: response });
+  dispatch({
+    type: 'QUESTION_LOADED',
+    payload: Object.keys(response).map((key) => response[key]),
+  });
 }
 
 export function saveQuestion(question) {

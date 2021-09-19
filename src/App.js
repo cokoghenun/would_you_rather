@@ -6,17 +6,17 @@ import Poll from './pages/Poll';
 import Signin from './pages/Signin';
 import Nav from './components/Nav';
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchUsers } from './reducers/user';
+import { fetchUsers } from './reducers/users';
 import Auth from './components/Auth';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUsers);
-  }, []);
+  }, [dispatch]);
   return (
     <div className='App'>
       <Router>
@@ -32,15 +32,18 @@ function App() {
               <NewQuestion />
             </Auth>
           </Route>
+          <Route exact path='/question/:id'>
+            <Auth>
+              <Poll />
+            </Auth>
+          </Route>
           <Route exact path='/leaderboard'>
             <Auth>
               <LeaderBoard />
             </Auth>
           </Route>
           <Route exact path='/signin'>
-            <Auth>
-              <Signin />
-            </Auth>
+            <Signin />
           </Route>
         </Switch>
       </Router>
