@@ -1,9 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Button from '../components/Button';
 import Card from '../components/Card';
 
 const Signin = () => {
-  const [selectedUser, setSelectedUser] = useState('audi');
+  const users = useSelector((state) =>
+    Object.keys(state.user).map((key) => state.user[key])
+  );
+  const [selectedUser, setSelectedUser] = useState('sarahedo');
+  const handleSignIn = () => {
+    localStorage.setItem(
+      'user',
+      JSON.stringify(users.filter((u) => u.id === selectedUser)[0])
+    );
+  };
+  useEffect(() => {
+    console.log(users);
+    // console.log(Object.keys(users).map((key) => users[key]));
+  }, []);
   return (
     <div className='signin'>
       <Card title='Welcome to Would You Rather App'>
@@ -15,12 +29,11 @@ const Signin = () => {
           className='signin-select'
           onChange={(e) => setSelectedUser(e.target.value)}
         >
-          <option value='volvo'>Volvo</option>
-          <option value='saab'>Saab</option>
-          <option value='mercedes'>Mercedes</option>
-          <option value='audi'>Audi</option>
+          {users.map((user) => (
+            <option value={user.id}>{user.name}</option>
+          ))}
         </select>
-        <Button text='Sign in' onClick={() => {}} />
+        <Button text='Sign in' onClick={handleSignIn} />
       </Card>
     </div>
   );

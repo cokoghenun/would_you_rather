@@ -23,16 +23,24 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path='/'>
-            <Auth component={Home} />
+            <Auth>
+              <Home />
+            </Auth>
           </Route>
           <Route exact path='/question'>
-            <Auth component={NewQuestion} />
+            <Auth>
+              <NewQuestion />
+            </Auth>
           </Route>
           <Route exact path='/leaderboard'>
-            <Auth component={LeaderBoard} />
+            <Auth>
+              <LeaderBoard />
+            </Auth>
           </Route>
           <Route exact path='/signin'>
-            <Auth component={Signin} />
+            <Auth>
+              <Signin />
+            </Auth>
           </Route>
         </Switch>
       </Router>

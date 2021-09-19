@@ -1,8 +1,8 @@
 import Signin from '../pages/Signin';
 
-const Auth = ({ component }) => {
+const Auth = ({ children }) => {
   const user = localStorage.getItem('user');
-  if (user) return <>{component}</>;
+  if (user) return children;
   return <Signin />;
 };
 
