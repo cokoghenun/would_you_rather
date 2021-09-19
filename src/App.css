@@ -51,3 +51,33 @@ body {
   font-size: 1rem;
   margin-bottom: 1rem;
 }
+.nav {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  background-color: #e9e9ed;
+  justify-content: space-evenly;
+  border-bottom: 1px solid black;
+}
+.nav-links {
+  width: 50%;
+  display: flex;
+  list-style-type: none;
+  justify-content: space-evenly;
+}
+.nav a {
+  text-decoration: none;
+}
+.nav a:visited {
+  color: black
+}
+.nav-account {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.nav-active-page {
+  background-color: black;
+  color: white !important;
+}
