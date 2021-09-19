@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchUsers } from './reducers/user';
+import Auth from './components/Auth';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,10 +22,18 @@ function App() {
       <Router>
         <Nav />
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/question' component={NewQuestion} />
-          <Route exact path='/leaderboard' component={LeaderBoard} />
-          <Route exact path='/signin' component={Signin} />
+          <Route exact path='/'>
+            <Auth component={Home} />
+          </Route>
+          <Route exact path='/question'>
+            <Auth component={NewQuestion} />
+          </Route>
+          <Route exact path='/leaderboard'>
+            <Auth component={LeaderBoard} />
+          </Route>
+          <Route exact path='/signin'>
+            <Auth component={Signin} />
+          </Route>
         </Switch>
       </Router>
     </div>
