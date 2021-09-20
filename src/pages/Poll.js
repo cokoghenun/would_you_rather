@@ -1,23 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
 import Button from '../components/Button';
 import Card from '../components/Card';
+import { saveQuestionAnswer } from '../reducers/questions';
 
 const Poll = () => {
-  const [selectedOption, setSelectedOption] = useState('huey');
-  const [showResults, setShowResults] = useState(false);
+  const location = useLocation();
+  const dispatch = useDispatch();
 
-  const handleOptionChange = (e) => {
-    // e.preventDefault();
-    setSelectedOption(e.target.value);
-  };
+  const user = useSelector((store) => store.user);
+  const question = useSelector((store) =>
+  store.questions.filter((q) => q.id === location.pathname.split('/')[2])
+  )[0];
+  
+  const [showResults, setShowResults] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('optionOne');
 
   const handleSubmit = () => {
+    dispatch(
+      saveQuestionAnswer({
+        authedUser: user?.id,
+        qid: question?.id,
+        answer: selectedOption,
+      })
+    );
     setShowResults(true);
   };
 
   return (
     <div className='poll'>
-      <Card title='Tyler Asks:'>
+      <Card title={`${question?.author} Asks:`}>
         {!showResults ? (
           <div className='poll-question'>
             <h2>Would You Rather...</h2>
@@ -28,11 +41,11 @@ const Poll = () => {
                   <input
                     type='radio'
                     name='options'
-                    value='huey'
-                    checked
-                    onChange={handleOptionChange}
+                    value='optionOne'
+                    checked={selectedOption === 'optionOne'}
+                    onChange={(e) => setSelectedOption(e.target.value)}
                   />
-                  Huey
+                  {question?.optionOne.text}
                 </label>
               </div>
 
@@ -41,10 +54,11 @@ const Poll = () => {
                   <input
                     type='radio'
                     name='options'
-                    value='dewey'
-                    onChange={handleOptionChange}
+                    value='optionTwo'
+                    onChange={(e) => setSelectedOption(e.target.value)}
+                    checked={selectedOption === 'optionTwo'}
                   />
-                  Dewey
+                  {question?.optionTwo.text}
                 </label>
               </div>
             </div>
@@ -56,33 +70,23 @@ const Poll = () => {
 
             <div className='poll-options'>
               <div>
-                <label>
-                  <input
-                    type='radio'
-                    name='options'
-                    value='huey'
-                    onChange={(e) => {
-                      e.preventDefault();
-                    }}
-                    checked={selectedOption === 'huey'}
-                  />
-                  Would You Rather: Huey (3/5)
-                </label>
+                {selectedOption === question?.optionOne.text ? '✅ ' : ''}
+                {question?.optionOne.text}({question.optionOne.votes.length}/
+                {
+                  question.optionOne.votes.concat(question.optionTwo.votes)
+                    .length
+                }
+                )
               </div>
 
               <div>
-                <label>
-                  <input
-                    type='radio'
-                    name='options'
-                    value='dewey'
-                    onChange={(e) => {
-                      e.preventDefault();
-                    }}
-                    checked={selectedOption === 'dewey'}
-                  />
-                  Would You Rather: Dewey (2/5)
-                </label>
+                {selectedOption === question?.optionTwo.text ? '✅ ' : ''}
+                {question?.optionTwo.text}({question.optionTwo.votes.length}/
+                {
+                  question.optionOne.votes.concat(question.optionTwo.votes)
+                    .length
+                }
+                )
               </div>
             </div>
           </div>

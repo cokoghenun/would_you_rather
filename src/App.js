@@ -11,11 +11,14 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchUsers } from './reducers/users';
 import Auth from './components/Auth';
+import { fetchQuestions } from './reducers/questions';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUsers);
+    dispatch(fetchQuestions);
+
   }, [dispatch]);
   return (
     <div className='App'>

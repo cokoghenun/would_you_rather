@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import Button from '../components/Button';
 import Card from '../components/Card';
-import { fetchQuestions } from '../reducers/questions';
 const Home = () => {
-  const dispatch = useDispatch();
   const history = useHistory();
   const questions = useSelector((store) => store.questions);
   const user = useSelector((store) => store.user);
@@ -18,9 +16,6 @@ const Home = () => {
     );
     // console.log(questions?.filter((q) => !user.questions.includes(q.id)));
   }, [questions, user.answers, user.questions]);
-  useEffect(() => {
-    dispatch(fetchQuestions);
-  }, [dispatch]);
   return (
     <div className='home'>
       <div>
