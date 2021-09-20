@@ -20,10 +20,14 @@ const NewQuestion = () => {
         optionTwoText: option2,
       })
     );
-    console.log('hello')
+    console.log('hello');
     setShouldGoHome(true);
   };
+
+  if (!user?.id && !localStorage.getItem('userid'))
+    return <Redirect to='/signin' />;
   if (shouldGoHome) return <Redirect to='/' />;
+
   return (
     <div className='newquestion'>
       <Card title='Create a New Question'>

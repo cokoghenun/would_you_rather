@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { Redirect, useLocation } from 'react-router';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import { saveQuestionAnswer } from '../reducers/questions';
@@ -10,6 +10,7 @@ const Poll = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
+  const users = useSelector((store) => store.users);
   const question = useSelector((store) =>
     store.questions.filter((q) => q.id === location.pathname.split('/')[2])
   )[0];
@@ -25,6 +26,11 @@ const Poll = () => {
         answer: selectedOption,
       })
     );
+    user.answers[question?.id] = selectedOption;
+    dispatch({
+      type: 'UPDATE_USERS',
+      payload: users.filter((u) => u.id !== user.id).concat([user]),
+    });
     setShowResults(true);
   };
 
@@ -35,69 +41,96 @@ const Poll = () => {
     }
   }, [user, question]);
 
+  if (!user?.id && !localStorage.getItem('userid'))
+    return <Redirect to='/signin' />;
+
   return (
     <div className='poll'>
       <Card title={`${question?.author} Asks:`}>
-        {!showResults ? (
-          <div className='poll-question'>
-            <h2>Would You Rather...</h2>
-
-            <div className='poll-options'>
-              <div>
-                <label>
-                  <input
-                    type='radio'
-                    name='options'
-                    value='optionOne'
-                    checked={selectedOption === 'optionOne'}
-                    onChange={(e) => setSelectedOption(e.target.value)}
-                  />
-                  {question?.optionOne.text}
-                </label>
-              </div>
-
-              <div>
-                <label>
-                  <input
-                    type='radio'
-                    name='options'
-                    value='optionTwo'
-                    onChange={(e) => setSelectedOption(e.target.value)}
-                    checked={selectedOption === 'optionTwo'}
-                  />
-                  {question?.optionTwo.text}
-                </label>
-              </div>
-            </div>
-            <Button text='Submit' onClick={handleSubmit} />
+        <div className='grid-flex'>
+          <div className='grid-flex-one'>
+            <img src={user.avatarURL} alt={user.id} />
           </div>
-        ) : (
-          <div className='poll-results'>
-            <h2>Results</h2>
+          <div className='grid-flex-two'>
+            {' '}
+            {!showResults ? (
+              <div className='poll-question'>
+                <h2>Would You Rather...</h2>
 
-            <div className='poll-options'>
-              <div>
-                {selectedOption === 'optionOne' ? '✅ ' : ''}
-                {question?.optionOne.text}({question.optionOne.votes.length}/
-                {
-                  question.optionOne.votes.concat(question.optionTwo.votes)
-                    .length
-                }
-                )
-              </div>
+                <div className='poll-options'>
+                  <div>
+                    <label>
+                      <input
+                        type='radio'
+                        name='options'
+                        value='optionOne'
+                        checked={selectedOption === 'optionOne'}
+                        onChange={(e) => setSelectedOption(e.target.value)}
+                      />
+                      {question?.optionOne.text}
+                    </label>
+                  </div>
 
-              <div>
-                {selectedOption === 'optionTwo' ? '✅ ' : ''}
-                {question?.optionTwo.text}({question.optionTwo.votes.length}/
-                {
-                  question.optionOne.votes.concat(question.optionTwo.votes)
-                    .length
-                }
-                )
+                  <div>
+                    <label>
+                      <input
+                        type='radio'
+                        name='options'
+                        value='optionTwo'
+                        onChange={(e) => setSelectedOption(e.target.value)}
+                        checked={selectedOption === 'optionTwo'}
+                      />
+                      {question?.optionTwo.text}
+                    </label>
+                  </div>
+                </div>
+                <Button text='Submit' onClick={handleSubmit} />
               </div>
-            </div>
+            ) : (
+              <div className='poll-results'>
+                <h2>Results</h2>
+
+                <div className='poll-options'>
+                  <div>
+                    {selectedOption === 'optionOne' ? '✅ ' : ''}
+                    {question?.optionOne.text}({question.optionOne.votes.length}
+                    /
+                    {
+                      question.optionOne.votes.concat(question.optionTwo.votes)
+                        .length
+                    }
+                    ) (
+                    {Math.ceil(
+                      (question.optionOne.votes.length * 100) /
+                        question.optionOne.votes.concat(
+                          question.optionTwo.votes
+                        ).length
+                    )}
+                    %)
+                  </div>
+
+                  <div>
+                    {selectedOption === 'optionTwo' ? '✅ ' : ''}
+                    {question?.optionTwo.text}({question.optionTwo.votes.length}
+                    /
+                    {
+                      question.optionOne.votes.concat(question.optionTwo.votes)
+                        .length
+                    }
+                    ) (
+                    {Math.ceil(
+                      (question.optionTwo.votes.length * 100) /
+                        question.optionOne.votes.concat(
+                          question.optionTwo.votes
+                        ).length
+                    )}
+                    %)
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </Card>
     </div>
   );

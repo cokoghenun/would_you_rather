@@ -29,6 +29,21 @@ body {
 .poll-options {
   margin-bottom: 1rem;
 }
+.grid-flex {
+  display: flex;
+  align-items: center;
+}
+.grid-flex-one {
+  width: 20%;
+  margin-right: 1rem;
+}
+.grid-flex-one img {
+  width: 100%;
+  border-radius: 100rem;
+}
+.grid-flex-two {
+  width: 80%;
+}
 .newquestion-options {
   margin-bottom: 1rem;
 }
@@ -67,9 +82,7 @@ body {
 }
 .nav a {
   text-decoration: none;
-}
-.nav a:visited {
-  color: black
+  color: black;
 }
 .nav-account {
   display: flex;
@@ -80,4 +93,7 @@ body {
 .nav-active-page {
   background-color: black;
   color: white !important;
+}
+.notfound {
+  text-align: center;
 }

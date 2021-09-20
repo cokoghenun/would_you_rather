@@ -12,7 +12,9 @@ const Signin = () => {
   const dispatch = useDispatch();
 
   const handleSignIn = () => {
-    localStorage.setItem('user', selectedUser);
+    localStorage.setItem('userid', selectedUser);
+    dispatch(updateUser(users.filter((u) => u.id === selectedUser)[0] || {}));
+
     setShouldGoHome(true);
   };
 
@@ -34,7 +36,9 @@ const Signin = () => {
           onChange={(e) => setSelectedUser(e.target.value)}
         >
           {users.map((user) => (
-            <option value={user.id}>{user.name}</option>
+            <option key={user.id} value={user.id}>
+              {user.name}
+            </option>
           ))}
         </select>
         <Button text='Sign in' onClick={handleSignIn} />

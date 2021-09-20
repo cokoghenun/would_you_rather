@@ -12,7 +12,7 @@ const Nav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName='nav-active-page' exact to='/question'>
+          <NavLink activeClassName='nav-active-page' exact to='/add'>
             New Question
           </NavLink>
         </li>

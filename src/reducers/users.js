@@ -4,6 +4,8 @@ export default function users(state = [], action) {
   switch (action.type) {
     case 'USERS_LOADED':
       return action.payload;
+    case 'UPDATE_USERS':
+      return action.payload;
     default:
       return state;
   }
