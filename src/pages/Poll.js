@@ -11,9 +11,9 @@ const Poll = () => {
 
   const user = useSelector((store) => store.user);
   const question = useSelector((store) =>
-  store.questions.filter((q) => q.id === location.pathname.split('/')[2])
+    store.questions.filter((q) => q.id === location.pathname.split('/')[2])
   )[0];
-  
+
   const [showResults, setShowResults] = useState(false);
   const [selectedOption, setSelectedOption] = useState('optionOne');
 
@@ -27,6 +27,13 @@ const Poll = () => {
     );
     setShowResults(true);
   };
+
+  useEffect(() => {
+    if (user?.answers && user?.answers[question?.id]) {
+      setSelectedOption(user?.answers[question?.id]);
+      setShowResults(true);
+    }
+  }, [user, question]);
 
   return (
     <div className='poll'>
@@ -70,7 +77,7 @@ const Poll = () => {
 
             <div className='poll-options'>
               <div>
-                {selectedOption === question?.optionOne.text ? '✅ ' : ''}
+                {selectedOption === 'optionOne' ? '✅ ' : ''}
                 {question?.optionOne.text}({question.optionOne.votes.length}/
                 {
                   question.optionOne.votes.concat(question.optionTwo.votes)
@@ -80,7 +87,7 @@ const Poll = () => {
               </div>
 
               <div>
-                {selectedOption === question?.optionTwo.text ? '✅ ' : ''}
+                {selectedOption === 'optionTwo' ? '✅ ' : ''}
                 {question?.optionTwo.text}({question.optionTwo.votes.length}/
                 {
                   question.optionOne.votes.concat(question.optionTwo.votes)

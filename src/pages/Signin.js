@@ -12,8 +12,7 @@ const Signin = () => {
   const dispatch = useDispatch();
 
   const handleSignIn = () => {
-    const user = users.filter((u) => u.id === selectedUser)[0];
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('user', selectedUser);
     setShouldGoHome(true);
   };
 
