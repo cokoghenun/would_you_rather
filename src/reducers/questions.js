@@ -5,7 +5,7 @@ export default function questions(state = [], action) {
     case 'QUESTION_LOADED':
       return action.payload;
     case 'ADD_QUESTION':
-      return { ...state, [action.payload.id]: action.payload };
+      return state.concat([action.payload]);
     default:
       return state;
   }

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import Button from '../components/Button';
@@ -7,15 +6,6 @@ const Home = () => {
   const history = useHistory();
   const questions = useSelector((store) => store.questions);
   const user = useSelector((store) => store.user);
-  useEffect(() => {
-    // console.log(questions);
-    console.log(
-      questions?.filter(
-        (q) => !user.answers[q.id] && !user.questions.includes(q.id)
-      )
-    );
-    // console.log(questions?.filter((q) => !user.questions.includes(q.id)));
-  }, [questions, user.answers, user.questions]);
   return (
     <div className='home'>
       <div>
