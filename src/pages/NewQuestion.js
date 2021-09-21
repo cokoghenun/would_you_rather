@@ -24,8 +24,8 @@ const NewQuestion = () => {
     setShouldGoHome(true);
   };
 
-  if (!user?.id && !localStorage.getItem('userid'))
-    return <Redirect to='/signin' />;
+  if (!user?.id )
+    return <Redirect to='/signin?rp=/add' />;
   if (shouldGoHome) return <Redirect to='/' />;
 
   return (

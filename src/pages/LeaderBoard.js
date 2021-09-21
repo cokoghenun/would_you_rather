@@ -17,7 +17,7 @@ const LeaderBoard = () => {
   );
   const user = useSelector((state) => state.user);
 
-  if (!user?.id  && !localStorage.getItem('userid')) return <Redirect to='/signin' />;
+  if (!user?.id  ) return <Redirect to='/signin?rp=/leaderboard' />;
 
   return (
     <div className='leaderboard'>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
+import { Redirect, useLocation } from 'react-router';
 import updateUser from '../actionCreators/user';
 import Button from '../components/Button';
 import Card from '../components/Card';
@@ -10,20 +10,20 @@ const Signin = () => {
   const [selectedUser, setSelectedUser] = useState('sarahedo');
   const [shouldGoHome, setShouldGoHome] = useState(false);
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  
   const handleSignIn = () => {
-    localStorage.setItem('userid', selectedUser);
     dispatch(updateUser(users.filter((u) => u.id === selectedUser)[0] || {}));
-
     setShouldGoHome(true);
   };
 
   useEffect(() => {
-    localStorage.clear();
     dispatch(updateUser({}));
   }, [dispatch]);
 
-  if (shouldGoHome) return <Redirect to='/' />;
+
+  if (shouldGoHome)
+    return <Redirect to={location.search.replace('?rp=', '')} />;
   return (
     <div className='signin'>
       <Card title='Welcome to Would You Rather App'>

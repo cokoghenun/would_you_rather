@@ -93,7 +93,32 @@ body {
 .nav-active-page {
   background-color: black;
   color: white !important;
+  padding: 0.5rem;
+  border-radius: 1rem;
+
 }
 .notfound {
   text-align: center;
+}
+.tab {
+  max-width: 600px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.tab-head {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  background-color: #e9e9ed;
+  
+}
+.tab-head div {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+.tab-body {
+  padding: 0.5rem;
+  padding-bottom: 1rem;
 }

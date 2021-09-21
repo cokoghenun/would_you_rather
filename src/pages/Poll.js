@@ -41,8 +41,7 @@ const Poll = () => {
     }
   }, [user, question]);
 
-  if (!user?.id && !localStorage.getItem('userid'))
-    return <Redirect to='/signin' />;
+  if (!user?.id) return <Redirect to={`/signin?rp=${location.pathname}`} />;
 
   return (
     <div className='poll'>
