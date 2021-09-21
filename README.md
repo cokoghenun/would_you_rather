@@ -1,19 +1,31 @@
 # Would You Rather?
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is project lets users play the "Would You Rather" game. The game goes like this: A user is asked a question in the form: “Would you rather [option A] or [option B] ?”. Answering "neither" or "both" is against the rules. Clone the project to get started.
 
-## Available Scripts
+## Clone Project
+
+This project is available on Github and you can clone via:
+```sh
+git clone https://github.com/cokoghenun/would_you_rather.git
+```
+Then install the project dependencies
+```
+cd would_you_rather.git && yarn install
+```
+
+## Starting the Project
 
 In the project directory, you can run:
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```sh
+yarn start
+```
+And this starts up the development server available at [http://localhost:3000](http://localhost:3000) on the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
+## Other Scripts
 ### `yarn test`
 
 Launches the test runner in the interactive watch mode.\
@@ -27,7 +39,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 ### `yarn eject`
 
+This ejects the project.
