@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useLocation } from 'react-router';
 import Button from '../components/Button';
+import NotFound from './NotFound';
 import Card from '../components/Card';
 import { saveQuestionAnswer } from '../reducers/questions';
 
@@ -25,30 +26,31 @@ const Poll = () => {
         qid: question?.id,
         answer: selectedOption,
       })
-    );
-    user.answers[question?.id] = selectedOption;
-    dispatch({
+      );
+      user.answers[question?.id] = selectedOption;
+      dispatch({
       type: 'UPDATE_USERS',
       payload: users.filter((u) => u.id !== user.id).concat([user]),
     });
     setShowResults(true);
   };
-
+  
   useEffect(() => {
     if (user?.answers && user?.answers[question?.id]) {
       setSelectedOption(user?.answers[question?.id]);
       setShowResults(true);
     }
   }, [user, question]);
-
+  
+  if(!question) return <NotFound />
   if (!user?.id) return <Redirect to={`/signin?rp=${location.pathname}`} />;
 
   return (
     <div className='poll'>
-      <Card title={`${question?.author} Asks:`}>
+      <Card title={`${users.filter(u => u.id === question.author)[0].name} Asks:`}>
         <div className='grid-flex'>
           <div className='grid-flex-one'>
-            <img src={user.avatarURL} alt={user.id} />
+            <img src={users.filter(u => u.id === question.author)[0].avatarURL} alt={question.author} />
           </div>
           <div className='grid-flex-two'>
             {' '}
